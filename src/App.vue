@@ -1,12 +1,30 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <timeline/>
+    <modal v-if="$store.state.editing" @close="$store.commit('setEdit')">
+      <edit-card/>
+    </modal>
+    <button v-else id="newcard" @click="$store.commit('setEdit', 'new')">+</button>
   </div>
 </template>
+
+<script>
+import Timeline from "@/components/Timeline.vue";
+import Modal from "@/components/Modal.vue";
+import EditCard from "@/components/EditCard.vue";
+
+export default {
+  components: {
+    Timeline,
+    Modal,
+    EditCard
+  },
+  beforeMount() {
+    this.$store.dispatch( 'loadNotes' );
+  }
+}
+
+</script>
 
 <style lang="scss">
 #app {
@@ -26,4 +44,22 @@
     }
   }
 }
+
+#newcard {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+
+  background-color: rgba(76, 175, 80, 0.6);
+  border: none;
+  color: white;
+  padding: 5px 12px 0px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
 </style>
