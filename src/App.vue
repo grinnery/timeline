@@ -5,6 +5,8 @@
       <edit-card/>
     </modal>
     <button v-else id="newcard" @click="$store.commit('setEdit', 'new')">+</button>
+    <button id="newcard" @click="$store.commit('setEdit', 'new')">+</button>
+    <google-button/>
   </div>
 </template>
 
@@ -12,12 +14,14 @@
 import Timeline from "@/components/Timeline.vue";
 import Modal from "@/components/Modal.vue";
 import EditCard from "@/components/EditCard.vue";
+import GoogleButton from "@/components/GoogleButton.vue";
 
 export default {
   components: {
     Timeline,
     Modal,
-    EditCard
+    EditCard,
+    GoogleButton
   },
   beforeMount() {
     this.$store.dispatch( 'loadNotes' );

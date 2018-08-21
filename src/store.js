@@ -13,7 +13,8 @@ function sortNotes(a, b) {
 export default new Vuex.Store({
   state: {
     notes: [],
-    editing: ''
+    editing: '',
+    user: {}
   },
   mutations: {
     addNote(state, note) {
@@ -40,6 +41,9 @@ export default new Vuex.Store({
     },
     setEdit(state, id) {
       state.editing = id;
+    },
+    setUser(state, user) {
+      state.user = user;
     }
   },
   actions: {
@@ -86,6 +90,9 @@ export default new Vuex.Store({
       if( idx !== -1 ) {
         return state.notes[idx];
       }
+    },
+    hasUser(state) {
+      return Object.keys(state.user).length !== 0;
     }
   }
 });
